@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="robots" content= "ALL" />
+<meta name="description" content= "Typogridphy &mdash; A Typographical and Grid Layout CSS Framework From Harry Roberts of CSS Wizardry" />
+<meta name="keywords" content= "" />
+<meta name="classification" content= "" />
+<meta name="author" content= "Harry Roberts - http://csswizardry.com" />
+<meta name="reply-to" content= "" />
+<meta name="copyright" content= "" />
+<link rel="shortcut icon" href="favicon.ico" />
+<title>Hacker Newspaper</title>
+<link rel="stylesheet" type="text/css" href="/style.css" media="screen" />
+<!--[if IE]><link rel="stylesheet" type="text/css" href="/ie.css" /><![endif]-->
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<span id="nav"><a href="http://news.ycombinator.com" title="Hacker News">Hacker News</a> <a href="http://gilesbowkett.blogspot.com/2009/04/miniapp-hacker-newspaper.html" title="reformatted by">reformatted by</a>  <a href="http://gilesbowkett.com" title="Giles Bowkett">Giles Bowkett</a></span>
+		</div>
+		<div class="generic nineforty">
+			<img src="/masthead.gif">
+		</div>
+		<div class="generic nineforty">
+		  <%= render_partial_story(0, 1) %>
+		</div>
+		<div class="generic twotwenty">
+		  <%= render_partial_story(5, 4) %>
+		</div>
+		<div class="generic sevenhun end">
+		  <%= render_partial_story(1, 2) %>
+		</div>
+		<div class="generic sixforty clear">
+		  <%= render_partial_story(2, 2) %>
+		</div>
+		<div class="generic twoeighty end">
+		  <%= render_partial_story(6, 4) %>
+		</div>
+		<div class="generic threeforty clear">
+		  <%= render_partial_story(7, 4) %>
+		</div>
+		<div class="generic fiveeighty end">
+		  <%= render_partial_story(3, 3) %>
+		</div>
+		<div class="generic foursixty clear">
+		  <%= render_partial_story(8, 4) %>
+		</div>
+		<div class="generic foursixty end">
+		  <%= render_partial_story(9, 4) %>
+		</div>
+		<div class="generic fourhun clear">
+		  <%= render_partial_story(10, 4) %>
+		</div>
+		<div class="generic fivetwenty end">
+		  <%= render_partial_story(11, 4) %>
+		</div>
+		<div class="generic nineforty">
+		  <%= render_partial_story(4, 2) %>
+		</div>
+		<div class="generic threeforty clear">
+		  <%= render_partial_story(13, 4) %>
+		</div>
+		<div class="generic twotwenty">
+		  <%= render_partial_story(12, 4) %>
+		</div>
+		<div class="generic threeforty end">
+		  <h5>Additional Stories</h5>
+			<ol class="threeforty left-float">
+			  <% @stories[14..100].each do |story| %>
+				<li><a href="<%= story.url %>"><%= story.headline %></a></li>
+				<% end %>
+			</ol>
+		</div>
+	</div>
+</body>
+</html>
+
