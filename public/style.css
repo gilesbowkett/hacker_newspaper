@@ -71,7 +71,7 @@ html{
 body{
 	font-size:62.5%;
 	font-family: Georgia, "Times New Roman", serif;
-	color:#666;
+	color:#000;
 	background:/*url(images/grid.gif) top center repeat-y*/ #fff; /* Uncomment to display the grid */
 	border-top:0.5em solid #666;
 	padding:0 1em;
