@@ -59,11 +59,12 @@ File.open(File.expand_path(File.dirname(__FILE__)) + "/../public/index.html", "w
 
     match = /http:\/\/([^\/]+)\//.match(entry.url)
     match ? domain = match[1] : next
+    url = (/techcrunch/ =~ domain ? "" : entry.url)
 
     # avoiding a shit-ton of Unicode
     text = "" if domain =~ /wikipedia/
 
-    Story.new(title, domain, entry.url, text)
+    Story.new(title, domain, url, text)
   end).compact
   
   file.puts ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/template.erb")).result(binding)
