@@ -1,5 +1,9 @@
 #!/usr/bin/ruby
 
+# something's wrong, I think it's that Hacker News sometimes goes down or takes too long to respond
+
+exit if File.new("latest.rss").stat.zero?
+
 require 'rubygems'
 gem 'hpricot', '= 0.6'
 require 'feed-normalizer'
