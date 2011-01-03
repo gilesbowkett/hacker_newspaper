@@ -65,7 +65,6 @@ File.open(File.expand_path(File.dirname(__FILE__)) + "/../public/index.html", "w
       string.new_york_times_get_over_your_pretentious_bullshit_please
     end
     text.gsub!(/^!\[CDATA\[http:\/\/news\.ycombinator\.com\/item\?id=\d+\]/, "")
-
     text.gsub!(/\[[^\[]+\]/, "")
     text = text[0..300]
 
