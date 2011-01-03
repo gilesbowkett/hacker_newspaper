@@ -155,6 +155,8 @@ def upgradeLink(link):
                 filp.close()
             except IOError:
                 pass
+            except UnicodeDecodeError:
+                pass
             return content
     else:
         return ""
