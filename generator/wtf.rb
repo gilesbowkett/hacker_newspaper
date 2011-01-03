@@ -1,9 +1,8 @@
 #!/usr/bin/ruby
 
-# something's wrong, I think it's that Hacker News sometimes goes down or takes too long to respond, because let's face it,
-# Arc is ass
+# Hacker News sometimes goes down or takes too long to respond, so, bail if that happens
 
-exit if File.new("latest.rss").stat.zero?
+exit if File.new(File.expand_path(File.dirname(__FILE__)) + "/latest.rss").stat.zero?
 
 require 'rubygems'
 gem 'hpricot', '= 0.6'
@@ -54,22 +53,41 @@ File.open(File.expand_path(File.dirname(__FILE__)) + "/../public/index.html", "w
     next unless entry.url && entry.title
 
     title = entry.title
+    comments_regex = /<a href="http:\/\/news\.ycombinator\.com\/item\?id=\d+">Comments<\/a>/
+    comments_url = comments_regex.match(entry.content)
+    # now we have the comments_url. however, this is not featured anywhere in the output or the template. this is
+    # an intentional move for the sake of quality control. I'm considering adding a comments link, but what might
+    # be a lot better is to add a feature which scrapes the comments_url for comments from patio11, peterc, pg, maxklein,
+    # etc., so you can estimate at a glance whether the comments are worth reading or not
+    entry.content.gsub!(comments_regex, "")
     text = Hpricot(entry.content).to_plain_text
     [text, title].each do |string|
       string.new_york_times_get_over_your_pretentious_bullshit_please
     end
-    text.gsub!(/^Comments \[http:\/\/news\.ycombinator\.com\/item\?id=\d+\]/, "")
+    text.gsub!(/^!\[CDATA\[http:\/\/news\.ycombinator\.com\/item\?id=\d+\]/, "")
+
     text.gsub!(/\[[^\[]+\]/, "")
     text = text[0..300]
 
     match = /http:\/\/([^\/]+)\//.match(entry.url)
     match ? domain = match[1] : next
-    url = (/techcrunch/ =~ domain ? "" : entry.url)
+
+    banned = %w{techcrunch
+                codinghorror
+                steve-yegge
+                skorks
+                sheddingbikes
+                oppugn.us}.inject(false) do |memo, frequent_timewaster|
+      domain.include?(frequent_timewaster) ? true : memo
+    end
+    banned = true if /zed shaw/i =~ text
+    banned = true if /zed shaw/i =~ title
+    next if banned
 
     # avoiding a shit-ton of Unicode
     text = "" if domain =~ /wikipedia/
 
-    Story.new(title, domain, url, text)
+    Story.new(title, domain, entry.url, text)
   end).compact
   
   file.puts ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/template.erb")).result(binding)
