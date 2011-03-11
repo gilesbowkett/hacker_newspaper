@@ -89,6 +89,12 @@ File.open(File.expand_path(File.dirname(__FILE__)) + "/../public/index.html", "w
     Story.new(title, domain, entry.url, text)
   end).compact
   
-  file.puts ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/template.erb")).result(binding)
+  # ridiculous easter egg
+  images = []
+  Dir.foreach("/webapps/hacker_newspaper/public/images") {|image| images << image if image =~ /\.jpg/}
+  @image = images[rand(images.size)]
+  template = (rand > 0.97 ? "lolcats" : "template")
+
+  file.puts ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/#{template}.erb")).result(binding)
 end
 
