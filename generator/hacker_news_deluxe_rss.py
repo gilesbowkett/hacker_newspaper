@@ -170,7 +170,7 @@ def upgradeFeed(feedUrl):
     upgradedLinks = []
     parsedFeed = feedparser.parse(feedData)
     
-    for entry in parsedFeed.entries:
+    for entry in parsedFeed.entries[0:23]:
         upgradedLinks.append((entry, upgradeLink(entry.link)))
         
     rss = """<rss version="2.0">
@@ -202,3 +202,22 @@ def upgradeFeed(feedUrl):
     
 if __name__ == "__main__":  
     print upgradeFeed(HN_RSS_FEED)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
