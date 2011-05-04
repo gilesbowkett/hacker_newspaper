@@ -28,7 +28,9 @@ end
 def render_partial_story(story_number, header_number)
   story = @stories[story_number]
   partial =<<PARTIAL
-	<a><h<%= header_number %>><%= story.headline %></h<%= header_number %>></a>
+	<h<%= header_number %>>
+    <a href="<%= story.url %>"><%= story.headline %></a>
+  </h<%= header_number %>>
 
 	<% unless story.text.blank? %>
 	<p>
