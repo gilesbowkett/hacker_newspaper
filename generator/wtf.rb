@@ -1,10 +1,13 @@
 #!/usr/bin/ruby
-# hacker news is broken again
-exit
+
+def booty_gremlins
+  # TODO: rename this something like "set_up_error_page"
+  system("cp /webapps/hacker_newspaper/public/booty_gremlins.html /webapps/hacker_newspaper/public/index.html")
+  exit
+end
 
 # Hacker News sometimes goes down or takes too long to respond, so, bail if that happens
-exit if File.new(File.expand_path(File.dirname(__FILE__)) + "/latest.rss").stat.zero?
-# TODO: switch to lolcat or booty gremlins if latest.rss ridiculously overlarge
+booty_gremlins if File.new(File.expand_path(File.dirname(__FILE__)) + "/latest.rss").stat.zero?
 
 require 'rubygems'
 gem 'hpricot', '= 0.6'
@@ -109,4 +112,8 @@ File.open(File.expand_path(File.dirname(__FILE__)) + "/../public/index.html", "w
   opened_template = File.read(File.expand_path(File.dirname(__FILE__)) + "/#{template}.erb")
   file.puts ERB.new(opened_template).result(binding)
 end
+
+# sometimes this process fails, creating a blank page. unsure why currently;
+# here's a band-aid for it.
+booty_gremlins if File.new("/webapps/hacker_newspaper/public/index.html").stat.zero?
 
