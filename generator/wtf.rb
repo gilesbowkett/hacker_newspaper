@@ -1,8 +1,10 @@
 #!/usr/bin/ruby
+# hacker news is broken again
+exit
 
 # Hacker News sometimes goes down or takes too long to respond, so, bail if that happens
-
 exit if File.new(File.expand_path(File.dirname(__FILE__)) + "/latest.rss").stat.zero?
+# TODO: switch to lolcat or booty gremlins if latest.rss ridiculously overlarge
 
 require 'rubygems'
 gem 'hpricot', '= 0.6'
@@ -29,7 +31,7 @@ def render_partial_story(story_number, header_number)
   story = @stories[story_number]
   partial =<<PARTIAL
 	<h<%= header_number %>>
-    <a href="<%= story.url %>"><%= story.headline %></a>
+    <%= story.headline %>
   </h<%= header_number %>>
 
 	<% unless story.text.blank? %>
@@ -73,16 +75,23 @@ File.open(File.expand_path(File.dirname(__FILE__)) + "/../public/index.html", "w
     match = /http:\/\/([^\/]+)\//.match(entry.url)
     match ? domain = match[1] : next
 
+    # I don't care what these people say
     banned = %w{techcrunch
                 codinghorror
                 steve-yegge
+                marco.org
                 skorks
+                learnpythonthehardway
                 sheddingbikes
                 oppugn.us}.inject(false) do |memo, frequent_timewaster|
       domain.include?(frequent_timewaster) ? true : memo
     end
+
+    # I don't care what anybody says about these topics
     banned = true if /zed shaw/i =~ text
     banned = true if /zed shaw/i =~ title
+
+    # banhammer of zillyhoo
     next if banned
 
     # avoiding a shit-ton of Unicode
@@ -97,6 +106,7 @@ File.open(File.expand_path(File.dirname(__FILE__)) + "/../public/index.html", "w
   @image = images[rand(images.size)]
   template = (rand > 0.97 ? "lolcats" : "template")
 
-  file.puts ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/#{template}.erb")).result(binding)
+  opened_template = File.read(File.expand_path(File.dirname(__FILE__)) + "/#{template}.erb")
+  file.puts ERB.new(opened_template).result(binding)
 end
 
