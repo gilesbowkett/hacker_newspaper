@@ -1,7 +1,7 @@
 Hacker Newspaper
 ================
 
-!(http://s3.amazonaws.com/giles/newspaper_041309/arrows.gif)
+![what it is](http://s3.amazonaws.com/giles/newspaper_041309/arrows.gif)
 
 yes, newspapers are dying, but they have centuries of graphic design and typography work behind them, and throwing the baby out with the bathwater wouldn't be wise.
 
