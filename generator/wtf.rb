@@ -100,6 +100,10 @@ end
   banned = true if /zed shaw/i =~ text
   banned = true if /zed shaw/i =~ title
 
+  # YC abuses privilege, privilege revoked
+  banned = true if /YC/i =~ text
+  banned = true if /YC/i =~ title
+
   # banhammer of zillyhoo
   next if banned
 
