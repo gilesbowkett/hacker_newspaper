@@ -100,9 +100,9 @@ end
   banned = true if /zed shaw/i =~ text
   banned = true if /zed shaw/i =~ title
 
-  # YC abuses privilege, privilege revoked
-  banned = true if /YC/i =~ text
-  banned = true if /YC/i =~ title
+  # skip any story where the link is a link to Hacker News itself. this is imperfect, but it
+  # eliminates YC job ads which fail to advertize themselves as such
+  banned = true if entry.url == comments_url.to_s.match(/http:\/\/[^"]+/)[0]
 
   # banhammer of zillyhoo
   next if banned
