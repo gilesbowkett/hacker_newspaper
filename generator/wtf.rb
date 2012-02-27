@@ -104,6 +104,9 @@ end
   # eliminates YC job ads which fail to advertize themselves as such
   banned = true if entry.url == comments_url.to_s.match(/http:\/\/[^"]+/)[0]
 
+  # skip any story like "YC S11"
+  banned = true if /YC [W|S]\d{2}/ =~ title
+
   # banhammer of zillyhoo
   next if banned
 
