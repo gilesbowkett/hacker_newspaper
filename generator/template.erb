@@ -68,12 +68,14 @@
 		  <%= render_partial_story(12, 4) %>
 		</div>
 		<div class="generic threeforty end">
-		  <h5>Additional Stories</h5>
-			<ol class="threeforty left-float">
-			  <% @stories[14..100].each do |story| %>
-				<li><a href="<%= story.url %>"><%= story.headline %></a></li>
-				<% end %>
-			</ol>
+      <% if @stories.length > 12 %>
+        <h5>Additional Stories</h5>
+        <ol class="threeforty left-float">
+          <% @stories[14..(@stories.length - 1)].each do |story| %>
+          <li><a href="<%= story.url %>"><%= story.headline %></a></li>
+          <% end %>
+        </ol>
+     <% end %>
 		</div>
 	</div>
 
