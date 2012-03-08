@@ -115,7 +115,7 @@ begin # god fucking dammit
     banned = true if entry.url == comments_url.to_s.match(/http:\/\/[^"]+/)[0]
 
     # skip any story like "YC S11"
-    banned = true if /YC [W|S]\d{2}/ =~ title
+    banned = true if /YC\s?([W|S])?\d{2}/ =~ title
 
     # banhammer of zillyhoo
     next if banned
