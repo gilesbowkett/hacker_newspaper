@@ -88,27 +88,20 @@ begin # god fucking dammit
     # I don't care what these people say
     banned = %w{techcrunch
                 uncrunched
+                msdn
                 codinghorror
                 steve-yegge
                 marco.org
                 skorks
                 learnpythonthehardway
                 sheddingbikes
-                oppugn.us}.inject(false) do |memo, frequent_timewaster|
-      domain.include?(frequent_timewaster) ? true : memo
+                oppugn.us}.inject(false) do |memo, lame|
+      domain.include?(lame) ? true : memo
     end
 
     # I don't care what anybody says about these topics
     banned = true if /zed shaw/i =~ text
     banned = true if /zed shaw/i =~ title
-
-    # jesus, get over it
-    banned = true if /github/i =~ text
-    banned = true if /github/i =~ title
-    banned = true if /rails/i =~ text
-    banned = true if /rails/i =~ title
-    banned = true if /egor/i =~ text
-    banned = true if /egor/i =~ title
 
     # skip any story where the link is a link to Hacker News itself. this is imperfect, but it
     # eliminates YC job ads which fail to advertize themselves as such
