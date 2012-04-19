@@ -85,7 +85,9 @@ begin # god fucking dammit
     match = /http:\/\/([^\/]+)\//.match(entry.url)
     match ? domain = match[1] : next
 
-    # I don't care what these people say
+    # I don't want to know
+    banned = true if /zed shaw/i =~ text
+    banned = true if /zed shaw/i =~ title
     banned = %w{techcrunch
                 uncrunched
                 msdn
@@ -99,16 +101,14 @@ begin # god fucking dammit
       domain.include?(lame) ? true : memo
     end
 
-    # I don't care what anybody says about these topics
-    banned = true if /zed shaw/i =~ text
-    banned = true if /zed shaw/i =~ title
-
-    # skip any story where the link is a link to Hacker News itself. this is imperfect, but it
-    # eliminates YC job ads which fail to advertize themselves as such
-    banned = true if entry.url == comments_url.to_s.match(/http:\/\/[^"]+/)[0]
+    # eliminate YC job ads by skipping any story with no comments URL
+    banned = true unless comments_url
 
     # skip any story like "YC S11"
     banned = true if /YC\s?([W|S])?\d{2}/ =~ title
+
+    # fix common spelling error
+    title.gsub!(/dependant/, 'dependent')
 
     # banhammer of zillyhoo
     next if banned
