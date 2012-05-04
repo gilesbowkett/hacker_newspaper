@@ -90,6 +90,7 @@ begin # god fucking dammit
     banned = true if /zed shaw/i =~ title
     banned = %w{techcrunch
                 uncrunched
+                pandodaily
                 msdn
                 codinghorror
                 steve-yegge
