@@ -105,8 +105,12 @@ begin # god fucking dammit
     # eliminate YC job ads by skipping any story with no comments URL
     banned = true unless comments_url
 
-    # skip any story like "YC S11"
+    # eliminate YC job ads by skipping any story like "YC S11"
     banned = true if /YC\s?([W|S])?\d{2}/ =~ title
+
+    # eliminate YC job ads by skipping any story where the link is a link to
+    # Hacker News itself.
+    banned = true if entry.url == comments_url.to_s.match(/http:\/\/[^"]+/)[0]
 
     # fix common spelling error
     title.gsub!(/dependant/, 'dependent')
