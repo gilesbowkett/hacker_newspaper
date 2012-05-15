@@ -97,6 +97,7 @@ begin # god fucking dammit
                 marco.org
                 skorks
                 learnpythonthehardway
+                learncodethehardway
                 sheddingbikes
                 oppugn.us}.inject(false) do |memo, lame|
       domain.include?(lame) ? true : memo
