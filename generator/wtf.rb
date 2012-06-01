@@ -118,6 +118,10 @@ begin # god fucking dammit
 
     # eliminate job ads eliminate job ads http://www.youtube.com/watch?v=3lYm0c7gYyU
 
+    # no, and no
+    banned = true if /show hn/i =~ title
+    banned = true if /tell hn/i =~ title
+
     # fix common spelling error
     title.gsub!(/dependant/, 'dependent')
 
