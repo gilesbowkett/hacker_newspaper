@@ -20,15 +20,31 @@
     
   .highlight {
     background-color: yellow;
+    color: black;
     font-weight: bold;
+    text-decoration: none;
+  }
+
+  .highlight a,
+  .highlight a:link,
+  .highlight a:visited,
+  .highlight a:active {
+    color: yellow;
+    background-color: black;
+    text-decoration: none;
+  }
+
+  .highlight a:hover {
+    color: black;
+    background-color: yellow;
   }
 
   </style>
 
   <h1>Attack Of The Booty Gremlins</h1>
   <p>
-    <span class="highlight">Site down for unknown reasons. Check
-    <a href="http://news.ycombinator.com">Hacker News</a> instead.</span>
+    <span class="highlight">Site down</span> for unknown reasons. Check
+    <a href="http://news.ycombinator.com">Hacker News</a> instead.
   </p>
 
   <p>
@@ -38,17 +54,19 @@
 
   <p>
     <span class="highlight">
+    The problem should fix itself.</span>
     The process which generates Hacker Newspaper will run again automatically within an
-    hour.</span> Most Hacker Newspaper stability issues disappear within that time
+    hour. Most Hacker Newspaper stability issues disappear within that time
     frame, and personally I (Giles, the site's creator) read Hacker News way too freaking
     often anyway.
+    I've probably already seen this and decided not to do anything about it.
   </p>
 
   <p>
-    I've probably already seen this and decided not to do anything about it. However,
+    However,
     <span class="highlight"><a
-    href="https://github.com/gilesbowkett/hacker_newspaper">the code is on GitHub</a> if
-    you want to fix it</span>,
+    href="https://github.com/gilesbowkett/hacker_newspaper">the code is on GitHub</a></span>
+    if you want to fix it,
     and patch requests are always welcome (especially when made in topic branches). It's
     built on Ruby and Python and uses nothing unusual in either language. The <code>slicehost</code>
     branch is effectively the master branch, but other than that the repo is very standard.</p>

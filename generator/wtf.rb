@@ -88,6 +88,7 @@ begin # god fucking dammit
     # I don't want to know
     banned = true if /zed shaw/i =~ text
     banned = true if /zed shaw/i =~ title
+
     banned = %w{techcrunch
                 uncrunched
                 pandodaily
@@ -115,8 +116,11 @@ begin # god fucking dammit
 
     # eliminate job ads by skipping any story which links to ycombinator.com
     banned = true if /ycombinator/ =~ domain
-
     # eliminate job ads eliminate job ads http://www.youtube.com/watch?v=3lYm0c7gYyU
+
+    # geek.com forces you to use their mobile subdomain if you're on an iPad, and
+    # it's just a nightmare of total incompetence. I hate it beyond reasoning.
+    banned = true if /geek.com/ =~ domain
 
     # no, and no
     banned = true if /show hn/i =~ title
