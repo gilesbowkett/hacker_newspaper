@@ -120,7 +120,12 @@ begin # god fucking dammit
 
     # geek.com forces you to use their mobile subdomain if you're on an iPad, and
     # it's just a nightmare of total incompetence. I hate it beyond reasoning.
+    # betabeat uses the same damn thing. I tracked down the name of the company
+    # who produces this horseshit and resells it to blogs, but wasn't able to figure
+    # out a consistent way of banning it, so I'm just going domain by domain for
+    # now.
     banned = true if /geek.com/ =~ domain
+    banned = true if /betabeat.com/ =~ domain
 
     # no, and no
     banned = true if /show hn/i =~ title
