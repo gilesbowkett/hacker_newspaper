@@ -59,6 +59,7 @@ begin # god fucking dammit
   begin
     feed.clean!
   rescue Hpricot::ParseError
+    puts "parse error"
     error_page
   end
 
@@ -104,15 +105,15 @@ begin # god fucking dammit
       domain.include?(lame) ? true : memo
     end
 
-    # eliminate YC job ads by skipping any story with no comments URL
-    banned = true unless comments_url
-
     # eliminate YC job ads by skipping any story like "YC S11"
     banned = true if /(YC\s?)?([W|S])?\d{2}/ =~ title
 
     # eliminate YC job ads by skipping any story where the link is a link to
     # Hacker News itself.
-    banned = true if entry.url == comments_url.to_s.match(/http:\/\/[^"]+/)[0]
+    find_job_ads = comments_url.to_s.match(/http:\/\/[^"]+/)
+    if find_job_ads && entry.url == find_job_ads[0]
+      banned = true
+    end
 
     # eliminate job ads by skipping any story which links to ycombinator.com
     banned = true if /ycombinator/ =~ domain
