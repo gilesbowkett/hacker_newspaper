@@ -91,7 +91,10 @@ begin # god fucking dammit
     banned = true if /zed shaw/i =~ title
 
     banned = %w{techcrunch
+                jeremymorgan
+                randsinrepose
                 uncrunched
+                techdirt
                 pandodaily
                 msdn
                 codinghorror
@@ -131,6 +134,9 @@ begin # god fucking dammit
     # no, and no
     banned = true if /show hn/i =~ title
     banned = true if /tell hn/i =~ title
+
+    # enough already
+    banned = true if /samsung/i =~ title
 
     # fix common spelling error
     title.gsub!(/dependant/, 'dependent')
