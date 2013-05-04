@@ -147,6 +147,9 @@ begin # god fucking dammit
     # avoiding a shit-ton of Unicode
     text = "" if domain =~ /wikipedia/
 
+    # hack to fix "comments comments" bug
+    text = "" if text.match(/Comments\s+Comments/)
+
     Story.new(title, domain, entry.url, text)
   end).compact
 
