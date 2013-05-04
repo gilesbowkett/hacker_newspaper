@@ -150,6 +150,9 @@ begin # god fucking dammit
     # hack to fix "comments comments" bug
     text = "" if text.match(/Comments\s+Comments/)
 
+    # hack to fix "comments" prepended to every story bug
+    text.gsub!(/^Comments\s+/, '')
+
     Story.new(title, domain, entry.url, text)
   end).compact
 
